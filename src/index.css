@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'circular-web';
+  src: url("../public/fonts/circularweb-book.woff2") format("woff2");
+}
+@font-face {
+  font-family: 'general';
+  src: url("../public/fonts/general.woff2") format("woff2");
+}
+@font-face {
+  font-family: 'robert-medium';
+  src: url("../public/fonts/robert-medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: 'robert-regular';
+  src: url("../public/fonts/robert-regular.woff2") format("woff2");
+}
+
+:root {
+  --color-bg: #dfdff0;
+}
+
+@theme inline {
+  --font-circular: 'circular-web', monospace;
+  --font-general: 'general', monospace;
+  --font-robmd: 'robert-medium', monospace;
+  --font-robreg: 'robert-regular', monospace;
+  --color-offwhite: var(--color-bg)
+}
+
+@layer base {
+  body {
+  @apply font-general bg-offwhite overflow-x-hidden w-dvw;
+}}

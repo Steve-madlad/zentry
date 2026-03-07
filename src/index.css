@@ -63,9 +63,7 @@
 }
 
 @layer utilities {
-  /* .flex-center {
-    @apply flex items-center justify-center;
-  }
+  /* 
   .flex-between {
     @apply flex items-center justify-between;
   }
@@ -84,14 +82,8 @@
   .just-end {
     @apply flex justify-end;
   }
-  .col {
-    @apply flex flex-col;
-  }
   .col-start {
     @apply flex flex-col items-start;
-  }
-  .col-center {
-    @apply flex flex-col items-center;
   }
   .col-between {
     @apply flex flex-col justify-between;
@@ -129,6 +121,12 @@
 
   .cursor {
     @apply cursor-pointer;
+  }
+  .col {
+    @apply flex flex-col;
+  }
+  .col-center {
+    @apply flex flex-col items-center;
   }
   .border-hsla {
     @apply border border-white/20;

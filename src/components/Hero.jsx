@@ -1,17 +1,16 @@
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
-import { useEffect, useRef, useState } from "react";
-import video1 from '../../public/videos/hero-1.mp4';
-import video2 from '../../public/videos/hero-2.mp4';
-import video3 from '../../public/videos/hero-3.mp4';
-import video4 from '../../public/videos/hero-4.mp4';
-import Button from "./custom/Button";
-import VideoPreview from "./VideoPreview";
-import { MousePointer2 } from "lucide-react";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+import { useEffect, useRef, useState } from 'react';
+import video1 from '@public/videos/hero-1.mp4';
+import video2 from '@public/videos/hero-2.mp4';
+import video3 from '@public/videos/hero-3.mp4';
+import video4 from '@public/videos/hero-4.mp4';
+import Button from './custom/Button';
+import VideoPreview from './VideoPreview';
+import { MousePointer2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
-
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
@@ -47,43 +46,43 @@ const Hero = () => {
   useGSAP(
     () => {
       if (hasClicked) {
-        gsap.set("#next-video", { visibility: "visible" });
-        gsap.to("#next-video", {
-          transformOrigin: "center center",
+        gsap.set('#next-video', { visibility: 'visible' });
+        gsap.to('#next-video', {
+          transformOrigin: 'center center',
           scale: 1,
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
           duration: 1,
-          ease: "power1.inOut",
+          ease: 'power1.inOut',
           onStart: () => nextVdRef.current.play(),
         });
-        gsap.from("#current-video", {
-          transformOrigin: "center center",
+        gsap.from('#current-video', {
+          transformOrigin: 'center center',
           scale: 0,
           duration: 1.5,
-          ease: "power1.inOut",
+          ease: 'power1.inOut',
         });
       }
     },
     {
       dependencies: [currentIndex],
       revertOnUpdate: true,
-    }
+    },
   );
 
   useGSAP(() => {
-    gsap.set("#video-frame", {
-      clipPath: "polygon(14% 0, 72% 0, 88% 90%, 0 95%)",
-      borderRadius: "0% 0% 40% 10%",
+    gsap.set('#video-frame', {
+      clipPath: 'polygon(14% 0, 72% 0, 88% 90%, 0 95%)',
+      borderRadius: '0% 0% 40% 10%',
     });
-    gsap.from("#video-frame", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      borderRadius: "0% 0% 0% 0%",
-      ease: "power1.inOut",
+    gsap.from('#video-frame', {
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+      borderRadius: '0% 0% 0% 0%',
+      ease: 'power1.inOut',
       scrollTrigger: {
-        trigger: "#video-frame",
-        start: "center center",
-        end: "bottom center",
+        trigger: '#video-frame',
+        start: 'center center',
+        end: 'bottom center',
         scrub: true,
       },
     });
@@ -106,7 +105,7 @@ const Hero = () => {
 
       <div
         id="video-frame"
-        className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-soft-lavender"
+        className="bg-soft-lavender relative z-10 h-dvh w-screen overflow-hidden rounded-lg"
       >
         <div>
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
@@ -137,39 +136,40 @@ const Hero = () => {
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
             onLoadedData={handleVideoLoad}
           />
+
           <video
-            src={getVidSrc(
-              currentIndex === totalVideos - 1 ? 1 : currentIndex
-            )}
+            src={getVidSrc(currentIndex === totalVideos - 1 ? 1 : currentIndex)}
             autoPlay
             loop
             muted
-            className="absolute left-0 top-0 size-full object-cover object-center"
+            className="absolute top-0 left-0 size-full object-cover object-center"
             onLoadedData={handleVideoLoad}
           />
         </div>
 
-        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-soft-lavender">
+        <h1 className="special-font hero-heading text-soft-lavender absolute right-5 bottom-5 z-40">
           G<b>A</b>MING
         </h1>
 
-        <div className="absolute left-0 top-0 z-40 size-full">
+        <div className="absolute top-0 left-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
             <h1 className="special-font hero-heading text-blue-100">
               redefi<b>n</b>e
             </h1>
 
-            <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
+            <p className="font-robert-regular mb-5 max-w-64 text-blue-100">
               Enter the Metagame Layer <br /> Unleash the Play Economy
             </p>
 
-            <Button className="gap-2"
-            ><MousePointer2 className="-scale-x-100" fill="black"/>Watch trailer</Button>
+            <Button className="gap-2">
+              <MousePointer2 className="-scale-x-100" fill="black" />
+              Watch trailer
+            </Button>
           </div>
         </div>
       </div>
 
-      <h1 className="special-font hero-heading absolute bottom-5 right-5 text-black">
+      <h1 className="special-font hero-heading absolute right-5 bottom-5 text-black">
         G<b>A</b>MING
       </h1>
     </div>

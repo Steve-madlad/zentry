@@ -16,8 +16,8 @@ export default function Button({
     <BaseButton
       {...props}
       className={cn(
-        className,
         'group font-general relative z-10 inline-flex w-fit overflow-hidden rounded-full bg-yellow-200 px-7 py-4 text-xs text-black uppercase',
+        className,
       )}
     >
       {LeftIcon && <LeftIcon />}

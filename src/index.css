@@ -1,3 +1,4 @@
+@import url('https://fonts.cdnfonts.com/css/general-sans');
 @import 'tailwindcss';
 
 @layer base {
@@ -21,8 +22,11 @@
     font-family: 'zentry-regular';
     src: url('../public/fonts/zentry-regular.woff2') format('woff2');
   }
+  html {
+    @apply scroll-smooth;
+  }
   body {
-    @apply font-general bg-offwhite w-dvw overflow-x-hidden;
+    @apply font-general-sans bg-offwhite w-dvw overflow-x-hidden;
   }
   main {
     @apply relative w-screen overflow-x-hidden;
@@ -44,11 +48,12 @@
 }
 
 @theme inline {
-  --font-circular: 'circular-web', monospace;
-  --font-general: 'general', monospace;
-  --font-robmd: 'robert-medium', monospace;
-  --font-robreg: 'robert-regular', monospace;
-  --font-zentry: 'zentry-regular', monospace;
+  --font-circular: 'circular-web', sans-serif;
+  --font-general: 'general', sans-serif;
+  --font-general-sans: 'General Sans', sans-serif;
+  --font-robmd: 'robert-medium', sans-serif;
+  --font-robreg: 'robert-regular', sans-serif;
+  --font-zentry: 'zentry-regular', sans-serif;
   --color-offwhite: var(--color-bg);
   --color-electric-violet: var(--color-electric-violet);
   --color-olive-green: var(--color-olive-green);
@@ -64,12 +69,6 @@
 
 @layer utilities {
   /* 
-  .flex-between {
-    @apply flex items-center justify-between;
-  }
-  .align-center {
-    @apply flex items-center;
-  }
   .align-start {
     @apply flex items-start;
   }
@@ -84,9 +83,6 @@
   }
   .col-start {
     @apply flex flex-col items-start;
-  }
-  .col-between {
-    @apply flex flex-col justify-between;
   }
   .col-full-center {
     @apply flex flex-col items-center justify-center;
@@ -118,7 +114,12 @@
   .hide-children > * {
     display: none;
     } */
-
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+  .align-center {
+    @apply flex items-center;
+  }
   .cursor {
     @apply cursor-pointer;
   }
@@ -128,16 +129,19 @@
   .col-center {
     @apply flex flex-col items-center;
   }
-  .border-hsla {
-    @apply border border-white/20;
+  .col-between {
+    @apply flex flex-col justify-between;
   }
+  /* .border-hsla {
+    @apply border border-white/20;
+  } */
 
   .nav-hover-btn {
-    @apply font-general text-lavender-mist relative ms-10 cursor-pointer text-xs uppercase after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white;
+    @apply font-general text-lavender-mist relative ms-10 cursor-pointer text-xs uppercase after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white;
   }
 
   .floating-nav {
-    @apply rounded-lg border bg-black;
+    @apply rounded-lg border bg-black/70 backdrop-blur-md;
   }
 
   .absolute-center {
@@ -173,7 +177,6 @@
     @apply flex flex-col gap-1 text-7xl leading-[.8] text-white uppercase sm:px-32 md:text-[6rem];
   }
 
-  /* //special */
   .animated-word {
     @apply font-zentry font-black opacity-0;
     transform: translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
@@ -181,9 +184,8 @@
     will-change: opacity, transform;
   }
 
-  /* hsla border */
   .bento-tilt_1 {
-    @apply relative col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out;
+    @apply relative col-span-2 overflow-hidden rounded-md border border-white/20 transition-transform duration-300 ease-out;
   }
 
   .bento-tilt_2 {

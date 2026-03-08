@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function AnimatedTitle({ title, className }: { title: string; className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -30,7 +30,7 @@ export default function AnimatedTitle({ title, className }: { title: string; cla
           {word.split(' ').map((letter, index) => (
             <span
               key={index}
-              className="animated-word"
+              className="animated-word special-font"
               dangerouslySetInnerHTML={{ __html: letter }}
             ></span>
           ))}

@@ -1,8 +1,10 @@
 import About from '@comps/About';
+import BentoGrid from '@comps/BentoGrid';
+import Contact from '@comps/Contact';
 import Hero from '@comps/Hero';
-import './index.css';
 import Navbar from '@comps/Navbar';
-import BentoGrid from './components/BentoGrid';
+import Story from '@comps/Story';
+import './index.css';
 
 export function App() {
   return (
@@ -11,6 +13,8 @@ export function App() {
       <Hero />
       <About />
       <BentoGrid />
+      <Story />
+      <Contact />
     </main>
   );
 }

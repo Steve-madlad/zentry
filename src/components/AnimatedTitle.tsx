@@ -1,7 +1,15 @@
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
 
-export default function AnimatedTitle({ title, className }: { title: string; className?: string }) {
+export default function AnimatedTitle({
+  title,
+  id,
+  className,
+}: {
+  title: string;
+  id: string;
+  className?: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,7 +32,7 @@ export default function AnimatedTitle({ title, className }: { title: string; cla
     return () => ctx.revert();
   }, []);
   return (
-    <div ref={containerRef} className={`animated-title ${className}`}>
+    <div ref={containerRef} id={id} className={`animated-title ${className}`}>
       {title.split('<br/>').map((word, index) => (
         <div key={index} className="flex-center max-w-full flex-wrap gap-2 px-10 md:gap-3">
           {word.split(' ').map((letter, index) => (

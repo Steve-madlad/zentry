@@ -8,13 +8,14 @@ import { useRef, useState } from 'react';
 
 export default function BentoGrid() {
   return (
-    <section className="-translate-y-1 bg-black pb-52">
-      <div className="container mx-auto px-3 md:px-10">
+    <section id='vault' className="bg-black pb-20 md:pb-35">
+      <div className="container mx-auto px-3 md:px-10 pr-8 md:pr-16 lg:pr-3">
         <div className="px-5 py-32">
-          <p className="font-circular text-lavender-mist text-lg">Into the metagame layer</p>
+          <h1 className="font-zentry font-bold text-lavender-mist text-4xl md:text-6xl">Into the metagame layer</h1>
           <p className="text-lavender-mist font-circular max-w-md text-lg opacity-50">
-            Immerse yourself in a rich and ever-expanding universe where a vibrant array of products
-            converge into an interconnected
+            Immerse yourself in a rich and ever-expanding universe where a vibrant
+            array of products converge into an interconnected overlay experience
+            on your world.
           </p>
         </div>
 
@@ -23,10 +24,11 @@ export default function BentoGrid() {
             src={gridVideo1}
             title={
               <>
-                radi<b>n</b>t
+                radia<b>n</b>t
               </>
             }
-            description="A cross-platform metagame app, tprning your activities across Web2 and Web3 games into a rewarding adventure."
+            description="A cross-platform metagame app, turning your activities across Web2 and Web3 games into a rewarding adventure."
+
             isCommingSoon
           />
         </BentoTilt>
@@ -40,23 +42,25 @@ export default function BentoGrid() {
                   zig<b>m</b>a
                 </>
               }
-              description="An anime and gaming-inspired NFT collection- the IP primed for expansion."
+              description="An anime and gaming-inspired NFT collection - the IP primed for expansion."
+
             ></BentoCard>
           </BentoTilt>
 
-          <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1! md:ms-0">
+          <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1!">
             <BentoCard
               src={gridVideo3}
               title={
                 <>
-                  n<b>e</b>exus
+                  n<b>e</b>xus
                 </>
               }
               description="A gamified social hub, adding a new dimension of play to social interaction for Web3 communities."
+
             ></BentoCard>
           </BentoTilt>
 
-          <BentoTilt className="bento-tilt_1 me-14 md:col-span-1! md:me-0">
+          <BentoTilt className="bento-tilt_1 md:col-span-1!">
             <BentoCard
               src={gridVideo4}
               title={
@@ -64,7 +68,8 @@ export default function BentoGrid() {
                   az<b>u</b>l
                 </>
               }
-              description="A cross-world AI Agent- elevating your gameplay to be more fun and productive."
+              description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
+
             ></BentoCard>
           </BentoTilt>
 

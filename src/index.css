@@ -69,9 +69,6 @@
 
 @layer utilities {
   /* 
-  .align-start {
-    @apply flex items-start;
-  }
   .just-start {
     @apply flex justify-start;
   }
@@ -96,9 +93,9 @@
   .text-dark {
     @apply text-[#333];
     }
-    .bg-dark {
-      @apply bg-[#333];
-      }
+  .bg-dark {
+    @apply bg-[#333];
+    }
   .abs-center {
     @apply absolute left-1/2 -translate-x-1/2;
     }
@@ -119,6 +116,9 @@
   }
   .align-center {
     @apply flex items-center;
+  }
+  .align-start {
+    @apply flex items-start;
   }
   .cursor {
     @apply cursor-pointer;
@@ -170,7 +170,10 @@
   }
 
   .about-image {
-    @apply absolute top-0 left-1/2 z-20 h-[60vh] w-96 origin-center -translate-x-1/2 overflow-hidden rounded-3xl md:w-[30vw];
+    /* Remove absolute and translate-x; let the parent flex-center handle it */
+    @apply z-20 h-[60vh] w-96 rounded-3xl md:w-[30vw];
+    /* This ensures the expansion happens from the center outward */
+    transform-origin: center center;
   }
 
   .animated-title {

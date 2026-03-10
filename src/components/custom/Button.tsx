@@ -16,13 +16,15 @@ export default function Button({
     <BaseButton
       {...props}
       className={cn(
-        'group font-general relative z-10 inline-flex w-fit overflow-hidden rounded-full bg-yellow-200 px-7 py-4 text-xs text-black uppercase',
+        'group font-general bg-electric-violet relative z-10 inline-flex w-fit overflow-hidden rounded-full px-7 py-4 text-xs text-black uppercase',
         className,
       )}
     >
-      {LeftIcon && <LeftIcon />}
-      {children}
-      {RightIcon && <RightIcon />}
+      <span className="flex-center gap-2">
+        {LeftIcon && <LeftIcon />}
+        {children}
+        {RightIcon && <RightIcon />}
+      </span>
     </BaseButton>
   );
 }

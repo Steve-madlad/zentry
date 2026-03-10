@@ -8,7 +8,7 @@ import gsap from 'gsap';
 
 export default function Navbar() {
   const navContainer = useRef(null);
-  const navItems = ['Nexus', 'Valult', 'Prologue', 'About', 'Contact'];
+  const navItems = ['Nexus', 'About', 'Vault', 'Prologue', 'Contact'];
 
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -66,9 +66,10 @@ export default function Navbar() {
               </p>
             </div>
 
-            <Button className="bg-lavender-mist gap-2">
-              Products <MousePointer2 className="-scale-x-100" fill="black" />
-            </Button>
+            {/* <Button asChild className="bg-lavender-mist gap-2">
+              <a className='flex-center gap-2' href="#vault">Products <MousePointer2 className="-scale-x-100" fill="black" /></a>
+            </Button> */}
+            <p className="special-font font-zentry text-white text-3xl"><b>Z</b>e<b>n</b>try</p>
           </div>
 
           <div className="align-center h-full">

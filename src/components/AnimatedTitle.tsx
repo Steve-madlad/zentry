@@ -7,7 +7,7 @@ export default function AnimatedTitle({
   className,
 }: {
   title: string;
-  id: string;
+  id?: string;
   className?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);

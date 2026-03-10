@@ -10,8 +10,8 @@ export default function About() {
     const clipAnimation = gsap.timeline({
       scrollTrigger: {
         trigger: '#clip',
-        start: 'center center',
-        end: '+=800 center',
+        start: 'top-=150 top',
+        end: '+=800',
         scrub: 0.5,
         pin: true,
         pinSpacing: true,
@@ -21,7 +21,9 @@ export default function About() {
     clipAnimation.to('.mask-clip-path', {
       width: '100vw',
       height: '100vh',
+      y: -150,
       borderRadius: 0,
+      ease: 'none',
     });
   });
 
@@ -34,19 +36,24 @@ export default function About() {
           title="Disc<b>o</b>ver the world's <br/> l<b>a</b>rgest shared adventure"
         />
 
-        <div className="about-subtext capitalize">
-          <p>the game of games begins--your life, now an epic MMORPG</p>
-          <p>Zentry unites gamers from countless games and platforms</p>
+        <div className="about-subtext capitalize translate-y-12 md:translate-y-0">
+          <p>The Game of Games begins—your life, now an epic MMORPG</p>
+          <p className="text-gray-500">
+            Zentry unites every player from countless games and platforms, both
+            digital and physical, into a unified Play Economy
+          </p>
         </div>
       </div>
 
-      <div className="h-dvh w-screen" id="clip">
-        <div className="mask-clip-path about-image">
-          <img
-            src={aboutimg}
-            alt="about us"
-            className="absolute top-0 left-0 size-full object-cover"
-          />
+      <div id="clip" className="h-dvh w-screen relative ">
+        <div className="align-start justify-center size-full">
+          <div className="mask-clip-path about-image relative overflow-hidden">
+            <img
+              src={aboutimg}
+              alt="about us"
+              className="absolute top-0 left-0 size-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </div>

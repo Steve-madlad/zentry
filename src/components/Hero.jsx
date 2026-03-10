@@ -18,6 +18,18 @@ const Hero = () => {
   const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
 
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "unset";
+    }
+
+    return () => {
+      document.body.style.overflowY = "unset";
+    };
+  }, [loading])
+
   const totalVideos = 4;
   const nextVdRef = useRef(null);
 
@@ -87,8 +99,6 @@ const Hero = () => {
       },
     });
   });
-
-  const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
   return (
     <div id="nexus" className="relative h-dvh w-screen overflow-x-hidden">
@@ -161,7 +171,7 @@ const Hero = () => {
               Enter the Metagame Layer <br /> Unleash the Play Economy
             </p>
 
-            <Button className="gap-2">
+            <Button className="gap-2 text-white">
               <MousePointer2 className="-scale-x-100" fill="black" />
               Watch trailer
             </Button>

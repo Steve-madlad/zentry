@@ -20,9 +20,9 @@ export default function Contact() {
 
         <div className="col-center text-center">
           <p className="font-general text-[10px] uppercase">join zentry</p>
-          <p className="special-font mt-10 w-full font-zentry text-5xl leading-[0.9] md:text-[6rem]">let's b<b>u</b>ild the <br /> new era of <br /> g<b>a</b>ming t<b>o</b>gether</p>
+          <p className="special-font relative z-10 mt-10 w-full font-zentry text-5xl leading-[0.9] md:text-[6rem]">let's b<b>u</b>ild the <br /> new era of <br /> g<b>a</b>ming t<b>o</b>gether</p>
 
-          <Button className="mt-10 bg-sky-cyan py-5">contact us</Button>
+          <Button className="mt-10 text-white py-5">contact us</Button>
         </div>
       </div>
     </div>

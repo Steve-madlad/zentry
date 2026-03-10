@@ -5,6 +5,7 @@ import Hero from '@comps/Hero';
 import Navbar from '@comps/Navbar';
 import Story from '@comps/Story';
 import './index.css';
+import Footer from '@comps/Footer';
 
 export function App() {
   return (
@@ -12,9 +13,12 @@ export function App() {
       <Navbar />
       <Hero />
       <About />
-      <BentoGrid />
-      <Story />
-      <Contact />
+      <div className="-mt-40">
+        <BentoGrid />
+        <Story />
+        <Contact />
+        <Footer />
+      </div>
     </main>
   );
 }

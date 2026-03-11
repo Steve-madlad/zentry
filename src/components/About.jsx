@@ -36,17 +36,17 @@ export default function About() {
           title="Disc<b>o</b>ver the world's <br/> l<b>a</b>rgest shared adventure"
         />
 
-        <div className="about-subtext capitalize translate-y-12 md:translate-y-0">
+        <div className="about-subtext translate-y-12 capitalize md:translate-y-0">
           <p>The Game of Games begins—your life, now an epic MMORPG</p>
           <p className="text-gray-500">
-            Zentry unites every player from countless games and platforms, both
-            digital and physical, into a unified Play Economy
+            Zentry unites every player from countless games and platforms, both digital and
+            physical, into a unified Play Economy
           </p>
         </div>
       </div>
 
-      <div id="clip" className="h-dvh w-screen relative ">
-        <div className="align-start justify-center size-full">
+      <div id="clip" className="relative h-dvh w-screen">
+        <div className="align-start size-full justify-center">
           <div className="mask-clip-path about-image relative overflow-hidden">
             <img
               src={aboutimg}

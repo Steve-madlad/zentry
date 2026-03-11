@@ -20,15 +20,15 @@ const Hero = () => {
 
   useEffect(() => {
     if (loading) {
-      document.body.style.overflowY = "hidden";
+      document.body.style.overflowY = 'hidden';
     } else {
-      document.body.style.overflowY = "unset";
+      document.body.style.overflowY = 'unset';
     }
 
     return () => {
-      document.body.style.overflowY = "unset";
+      document.body.style.overflowY = 'unset';
     };
-  }, [loading])
+  }, [loading]);
 
   const totalVideos = 4;
   const nextVdRef = useRef(null);

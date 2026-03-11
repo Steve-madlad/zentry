@@ -18,21 +18,22 @@ export default function Navbar() {
   const { y: currentScrollY } = useWindowScroll();
 
   const hideNav = () => {
-    if (currentScrollY === 0)
-      return;
+    if (currentScrollY === 0) return;
     setIsNavVisible(false);
     navContainer.current.classList.remove('floating-nav');
-  }
+  };
 
   const showNav = (floating = true) => {
     setIsNavVisible(true);
-    floating ? navContainer.current.classList.add('floating-nav') : navContainer.current.classList.remove('floating-nav');
-  }
+    floating
+      ? navContainer.current.classList.add('floating-nav')
+      : navContainer.current.classList.remove('floating-nav');
+  };
 
   useEffect(() => {
-    if (currentScrollY === 0) showNav(false)
-    else if (currentScrollY > lastScrollY) hideNav()
-    else if (currentScrollY < lastScrollY) showNav()
+    if (currentScrollY === 0) showNav(false);
+    else if (currentScrollY > lastScrollY) hideNav();
+    else if (currentScrollY < lastScrollY) showNav();
 
     setLastScrollY(currentScrollY);
   }, [currentScrollY, lastScrollY]);
@@ -67,13 +68,20 @@ export default function Navbar() {
               <img src={navLogo} alt="logo" className="w-10" />
             </div>
 
-            <p className="special-font font-zentry text-white text-3xl"><b>Z</b>e<b>n</b>try</p>
+            <p className="special-font font-zentry text-3xl text-white">
+              <b>Z</b>e<b>n</b>try
+            </p>
           </div>
 
           <div className="align-center h-full">
             <div className="hidden md:block">
               {navItems.map((item, index) => (
-                <a onClick={hideNav} key={index} href={`#${item.toLocaleLowerCase()}`} className="nav-hover-btn">
+                <a
+                  onClick={hideNav}
+                  key={index}
+                  href={`#${item.toLocaleLowerCase()}`}
+                  className="nav-hover-btn"
+                >
                   {item}
                 </a>
               ))}

@@ -26,7 +26,7 @@ export default function Story() {
         rotateX: 0,
         rotateY: 0,
         ease: 'power1.inOut',
-      })
+      });
     }
   };
   const handleMouseMove = (e) => {
@@ -56,7 +56,7 @@ export default function Story() {
 
   return (
     <section id="prologue" className="min-h-dvh w-screen bg-black text-blue-50">
-      <div className="col-center size-full pb-24 py-10">
+      <div className="col-center size-full py-10 pb-24">
         <p className="font-general text-sm uppercase md:text-[10px]">the multiversal world</p>
         <div className="relative size-full">
           <AnimatedTitle
@@ -64,26 +64,27 @@ export default function Story() {
             id="#story"
             className="pointer-events-none relative z-10 mt-5 mix-blend-difference"
           />
-          {!isMobile ? <div className="story-img-container hidden md:flex">
-            <div className="story-img-mask">
-              <div className="story-img-content">
-                <img
-                  src={storyImage}
-                  onMouseUp={handleMouseLeave}
-                  onMouseLeave={handleMouseLeave}
-                  onMouseEnter={handleMouseLeave}
-                  onMouseMove={handleMouseMove}
-                  alt="entrance"
-                  ref={frameRef}
-                  className="object-contain"
-                />
+          {!isMobile ? (
+            <div className="story-img-container hidden md:flex">
+              <div className="story-img-mask">
+                <div className="story-img-content">
+                  <img
+                    src={storyImage}
+                    onMouseUp={handleMouseLeave}
+                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={handleMouseLeave}
+                    onMouseMove={handleMouseMove}
+                    alt="entrance"
+                    ref={frameRef}
+                    className="object-contain"
+                  />
+                </div>
               </div>
+
+              <RoundedCorners />
             </div>
-
-            <RoundedCorners />
-          </div>
-
-            : <div className="flex-center md:hidden! py-5">
+          ) : (
+            <div className="flex-center py-5 md:hidden!">
               <img
                 src={storyImage}
                 onMouseUp={handleMouseLeave}
@@ -92,18 +93,17 @@ export default function Story() {
                 onMouseMove={handleMouseMove}
                 alt="entrance"
                 ref={frameRef}
-                className="object-contain w-10/12 sm:w-2/3 rounded-lg"
+                className="w-10/12 rounded-lg object-contain sm:w-2/3"
               />
             </div>
-          }
+          )}
         </div>
 
-        <div className="flex w-full md:pl-64 lg:pl-0 justify-center md:me-44 md:-mt-64 lg:justify-end">
+        <div className="flex w-full justify-center md:me-44 md:-mt-64 md:pl-64 lg:justify-end lg:pl-0">
           <div className="col-center h-full w-fit md:items-start!">
-            <p className="font-circular mt-3 px-3.5 pr-6 max-w-sm text-center text-violet-50 md:text-start">
-              Where realms converge, lies Zentry and the boundless pillar.
-              Discover its secrets and shape your fate amidst infinite
-              opportunities.
+            <p className="font-circular mt-3 max-w-sm px-3.5 pr-6 text-center text-violet-50 md:text-start">
+              Where realms converge, lies Zentry and the boundless pillar. Discover its secrets and
+              shape your fate amidst infinite opportunities.
             </p>
 
             <Button id="realm-button" className="mt-5 bg-white py-5">

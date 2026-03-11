@@ -8,7 +8,7 @@
     "tail-watch": "bunx tailwindcss -i ./src/index.css -o ./src/tailwind.css --watch",
     "app-watch": "bun --hot src/index.ts",
     "dev": "concurrently \"bun tail-watch\" \"bun app-watch\"",
-    "builder": "bunx @tailwindcss/cli -i ./src/index.css -o ./src/tailwind.css --minify && bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
+    "build": "bunx @tailwindcss/cli -i ./src/index.css -o ./src/tailwind.css --minify && bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
     "start": "NODE_ENV=production bun src/index.ts",
     "format": "prettier --write ."
   },

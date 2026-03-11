@@ -8,13 +8,13 @@ import { useRef, useState } from 'react';
 
 export default function BentoGrid() {
   return (
-    <section id="vault" className="bg-black pb-20 md:pb-35">
+    <section id="vault" className="pb-20 md:pb-35">
       <div className="container mx-auto px-3 pr-8 md:px-10 md:pr-16 lg:pr-13">
         <div className="px-5 py-32">
-          <h1 className="font-zentry text-lavender-mist text-4xl font-bold md:text-6xl">
+          <h1 className="mix-blend-difference text-white font-zentry text-4xl font-bold md:text-6xl">
             Into the metagame layer
           </h1>
-          <p className="text-lavender-mist font-circular max-w-md text-lg opacity-50">
+          <p className="text-white mix-blend-difference font-circular max-w-md text-lg opacity-50">
             Immerse yourself in a rich and ever-expanding universe where a vibrant array of products
             converge into an interconnected overlay experience on your world.
           </p>
@@ -104,10 +104,10 @@ export const BentoCard = ({ src, title, description, isCommingSoon }) => {
         autoPlay
         className="absolute top-0 left-0 size-full object-cover object-center"
       />
-      <div className="col-between text-lavender-mist relative z-10 size-full p-5">
+      <div className="col-between text-white relative z-10 size-full p-5">
         <div>
           <h1 className="bento-title special-font">{title}</h1>
-          <p className="mt-3 max-w-64 text-xs md:text-base">{description}</p>
+          <p className="mt-3 max-w-64 text-xs md:text-base opacity-80">{description}</p>
         </div>
       </div>
       {title}

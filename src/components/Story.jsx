@@ -55,9 +55,11 @@ export default function Story() {
   };
 
   return (
-    <section id="prologue" className="min-h-dvh w-screen bg-black text-blue-50">
+    <section id="prologue" className="min-h-dvh w-screen text-inherit">
       <div className="col-center size-full py-10 pb-24">
-        <p className="font-general text-sm uppercase md:text-[10px]">the multiversal world</p>
+        <p className="font-general text-sm uppercase md:text-[10px] opacity-70">
+          the multiversal world
+        </p>
         <div className="relative size-full">
           <AnimatedTitle
             title="the st<b>o</b>ry of <br/>a hidden real<b>m</b>"
@@ -101,13 +103,16 @@ export default function Story() {
 
         <div className="flex w-full justify-center md:me-44 md:-mt-64 md:pl-64 lg:justify-end lg:pl-0">
           <div className="col-center h-full w-fit md:items-start!">
-            <p className="font-circular mt-3 max-w-sm px-3.5 pr-6 text-center text-violet-50 md:text-start">
+            <p className="font-circular mt-3 max-w-sm px-3.5 pr-6 text-center text-white mix-blend-difference md:text-start">
               Where realms converge, lies Zentry and the boundless pillar. Discover its secrets and
               shape your fate amidst infinite opportunities.
             </p>
 
-            <Button id="realm-button" className="mt-5 bg-white py-5">
-              discover prolouge
+            <Button
+              id="realm-button"
+              className="mt-5 bg-white text-black mix-blend-difference py-5"
+            >
+              discover prologue
             </Button>
           </div>
         </div>

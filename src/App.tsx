@@ -1,11 +1,10 @@
 import About from '@comps/About';
-import BentoGrid from '@comps/BentoGrid';
 import Contact from '@comps/Contact';
+import Footer from '@comps/Footer';
 import Hero from '@comps/Hero';
 import Navbar from '@comps/Navbar';
-import Story from '@comps/Story';
+import BlackSection from './components/BlackSection';
 import './index.css';
-import Footer from '@comps/Footer';
 
 export function App() {
   return (
@@ -14,8 +13,7 @@ export function App() {
       <Hero />
       <About />
       <div className="-mt-40">
-        <BentoGrid />
-        <Story />
+        <BlackSection />
         <Contact />
         <Footer />
       </div>

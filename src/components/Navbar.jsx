@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import navLogo from '@public/img/logo.png';
-import Button from './custom/Button';
-import { MousePointer2 } from 'lucide-react';
 import audio from '@public/audio/loop.mp3';
-import { useWindowScroll } from 'react-use';
+import navLogo from '@/zentry-logo.png';
 import gsap from 'gsap';
+import { useEffect, useRef, useState } from 'react';
+import { useWindowScroll } from 'react-use';
+import Button from './custom/Button';
 
 export default function Navbar() {
   const navContainer = useRef(null);
@@ -18,17 +17,22 @@ export default function Navbar() {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const { y: currentScrollY } = useWindowScroll();
 
+  const hideNav = () => {
+    if (currentScrollY === 0)
+      return;
+    setIsNavVisible(false);
+    navContainer.current.classList.remove('floating-nav');
+  }
+
+  const showNav = (floating = true) => {
+    setIsNavVisible(true);
+    floating ? navContainer.current.classList.add('floating-nav') : navContainer.current.classList.remove('floating-nav');
+  }
+
   useEffect(() => {
-    if (currentScrollY === 0) {
-      setIsNavVisible(true);
-      navContainer.current.classList.remove('floating-nav');
-    } else if (currentScrollY > lastScrollY) {
-      setIsNavVisible(false);
-      navContainer.current.classList.remove('floating-nav');
-    } else if (currentScrollY < lastScrollY) {
-      setIsNavVisible(true);
-      navContainer.current.classList.add('floating-nav');
-    }
+    if (currentScrollY === 0) showNav(false)
+    else if (currentScrollY > lastScrollY) hideNav()
+    else if (currentScrollY < lastScrollY) showNav()
 
     setLastScrollY(currentScrollY);
   }, [currentScrollY, lastScrollY]);
@@ -61,21 +65,15 @@ export default function Navbar() {
           <div className="align-center gap-7">
             <div className="align-center gap-3">
               <img src={navLogo} alt="logo" className="w-10" />
-              <p className="special-font text-lg text-white md:hidden">
-                <b>Zentry</b>
-              </p>
             </div>
 
-            {/* <Button asChild className="bg-lavender-mist gap-2">
-              <a className='flex-center gap-2' href="#vault">Products <MousePointer2 className="-scale-x-100" fill="black" /></a>
-            </Button> */}
             <p className="special-font font-zentry text-white text-3xl"><b>Z</b>e<b>n</b>try</p>
           </div>
 
           <div className="align-center h-full">
             <div className="hidden md:block">
               {navItems.map((item, index) => (
-                <a key={index} href={`#${item.toLocaleLowerCase()}`} className="nav-hover-btn">
+                <a onClick={hideNav} key={index} href={`#${item.toLocaleLowerCase()}`} className="nav-hover-btn">
                   {item}
                 </a>
               ))}
@@ -83,6 +81,7 @@ export default function Navbar() {
 
             <Button
               className="align-center ml-7 space-x-0.5 rounded-full bg-transparent p-2"
+              shiftAnimation={false}
               onClick={toggleAudioIndicator}
             >
               <audio ref={audioElementRef} className="hidden" loop src={audio}></audio>
@@ -91,7 +90,7 @@ export default function Navbar() {
                   key={index}
                   className={`indicator-line ${isIndicatorActive ? 'active' : ''}`}
                   style={{ animationDelay: `${index * 0.1}s` }}
-                ></div>
+                />
               ))}
             </Button>
           </div>

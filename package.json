@@ -1,8 +1,9 @@
 {
-  "name": "bun-react-template",
+  "name": "Zentry",
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "author": "Steve",
   "scripts": {
     "tail-watch": "bunx tailwindcss -i ./src/index.css -o ./src/tailwind.css --watch",
     "app-watch": "bun --hot src/index.ts",

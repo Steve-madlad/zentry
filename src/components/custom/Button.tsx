@@ -6,12 +6,11 @@ import type { LucideIcon } from 'lucide-react';
 
 export default function Button({
   children,
-  leftIcon: LeftIcon,
-  rightIcon: RightIcon,
+  shiftAnimation = true,
   className,
   ...props
 }: ComponentProps<typeof BaseButton> &
-  VariantProps<typeof buttonVariants> & { leftIcon?: LucideIcon; rightIcon?: LucideIcon }) {
+  VariantProps<typeof buttonVariants> & { shiftAnimation?: boolean }) {
   return (
     <BaseButton
       {...props}
@@ -21,9 +20,18 @@ export default function Button({
       )}
     >
       <span className="flex-center gap-2">
-        {LeftIcon && <LeftIcon />}
-        {children}
-        {RightIcon && <RightIcon />}
+        {shiftAnimation ? (
+          <>
+            <div className="flex-center translate-y-0 skew-y-0 gap-2 transition duration-500 group-hover:translate-y-[-240%] group-hover:skew-y-12">
+              {children}
+            </div>
+            <div className="flex-center absolute translate-y-[230%] skew-y-12 gap-2 transition duration-500 group-hover:translate-y-0 group-hover:skew-y-0">
+              {children}
+            </div>
+          </>
+        ) : (
+          children
+        )}
       </span>
     </BaseButton>
   );

@@ -123,7 +123,7 @@ export default function Footer() {
                   {section.links.map((link) => (
                     <li key={link}>
                       <a
-                        href="#"
+                        href={link === 'Contact' ? `#contact` : '#'}
                         className="group flex items-center text-white transition-colors hover:text-cyan-300"
                       >
                         <span className="mr-0 h-0.5 w-0 bg-cyan-300 transition-all duration-300 group-hover:mr-2 group-hover:w-4"></span>
@@ -151,6 +151,7 @@ export default function Footer() {
 
             <Button
               onClick={scrollToTop}
+              shiftAnimation={false}
               className="group flex h-fit items-center gap-3 bg-transparent text-sm font-bold tracking-widest text-white uppercase"
             >
               Back on Top

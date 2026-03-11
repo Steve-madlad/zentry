@@ -9,7 +9,7 @@ import { useRef, useState } from 'react';
 export default function BentoGrid() {
   return (
     <section id='vault' className="bg-black pb-20 md:pb-35">
-      <div className="container mx-auto px-3 md:px-10 pr-8 md:pr-16 lg:pr-3">
+      <div className="container mx-auto px-3 md:px-10 pr-8 md:pr-16 lg:pr-13">
         <div className="px-5 py-32">
           <h1 className="font-zentry font-bold text-lavender-mist text-4xl md:text-6xl">Into the metagame layer</h1>
           <p className="text-lavender-mist font-circular max-w-md text-lg opacity-50">
@@ -19,7 +19,7 @@ export default function BentoGrid() {
           </p>
         </div>
 
-        <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
+        <BentoTilt className="bento-tilt_1 relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
           <BentoCard
             src={gridVideo1}
             title={

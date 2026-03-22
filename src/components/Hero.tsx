@@ -12,7 +12,12 @@ import { Loader2, MousePointer2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Hero({ onPriorityLoad }: { onPriorityLoad: () => void }) {
+type HeroProps = {
+  onPriorityLoad: () => void;
+  priorityAssetsReady?: boolean;
+};
+
+export default function Hero({ onPriorityLoad, priorityAssetsReady = false }: HeroProps) {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
 
@@ -41,7 +46,7 @@ export default function Hero({ onPriorityLoad }: { onPriorityLoad: () => void })
 
   const isSlideReady = slideReadyCount >= slideVideoCount;
 
-  const videos = [video1, video2, video3, video4];
+  const videos = [video2, video3, video4];
   const getVidSrc = (index: number) => {
     return videos[index - 1];
   };
@@ -101,6 +106,17 @@ export default function Hero({ onPriorityLoad }: { onPriorityLoad: () => void })
 
   return (
     <div id="nexus" className="relative h-dvh w-screen overflow-x-hidden">
+      {priorityAssetsReady && (
+        <div
+          className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0"
+          aria-hidden
+        >
+          {videos.map((src, i) => (
+            <video key={`hero-prefetch-${i}`} preload="auto" src={src} muted playsInline />
+          ))}
+        </div>
+      )}
+
       <div
         id="video-frame"
         className="bg-soft-lavender relative z-10 h-dvh w-screen overflow-hidden rounded-lg"

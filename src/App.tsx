@@ -45,7 +45,7 @@ export function App() {
       )}
 
       <Navbar />
-      <Hero onPriorityLoad={handleAssetLoad} />
+      <Hero onPriorityLoad={handleAssetLoad} priorityAssetsReady={!isLoading} />
       <About onPriorityLoad={handleAssetLoad} />
       <div className="-mt-40">
         <BlackSection onPriorityLoad={handleAssetLoad} />

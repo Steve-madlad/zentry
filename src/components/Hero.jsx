@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import video1 from '@public/videos/hero-1.mp4';
 import video2 from '@public/videos/hero-2.mp4';
 import video3 from '@public/videos/hero-3.mp4';
@@ -15,33 +15,8 @@ const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
 
-  const [loading, setLoading] = useState(true);
-  const [loadedVideos, setLoadedVideos] = useState(0);
-
-  useEffect(() => {
-    if (loading) {
-      document.body.style.overflowY = 'hidden';
-    } else {
-      document.body.style.overflowY = 'unset';
-    }
-
-    return () => {
-      document.body.style.overflowY = 'unset';
-    };
-  }, [loading]);
-
   const totalVideos = 4;
   const nextVdRef = useRef(null);
-
-  const handleVideoLoad = () => {
-    setLoadedVideos((prev) => prev + 1);
-  };
-
-  useEffect(() => {
-    if (loadedVideos === totalVideos - 1) {
-      setLoading(false);
-    }
-  }, [loadedVideos]);
 
   const videos = [video1, video2, video3, video4];
 
@@ -102,17 +77,6 @@ const Hero = () => {
 
   return (
     <div id="nexus" className="relative h-dvh w-screen overflow-x-hidden">
-      {loading && (
-        <div className="flex-center absolute z-100 h-dvh w-screen overflow-hidden bg-violet-50">
-          {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
-          <div className="three-body">
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-          </div>
-        </div>
-      )}
-
       <div
         id="video-frame"
         className="bg-soft-lavender relative z-10 h-dvh w-screen overflow-hidden rounded-lg"
@@ -129,9 +93,9 @@ const Hero = () => {
                   src={getVidSrc((currentIndex % totalVideos) + 1)}
                   loop
                   muted
+                  preload="none"
                   id="current-video"
                   className="size-64 origin-center scale-150 object-cover object-center"
-                  onLoadedData={handleVideoLoad}
                 />
               </div>
             </VideoPreview>
@@ -142,9 +106,9 @@ const Hero = () => {
             src={getVidSrc(currentIndex)}
             loop
             muted
+            preload="none"
             id="next-video"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
-            onLoadedData={handleVideoLoad}
           />
 
           <video
@@ -152,8 +116,8 @@ const Hero = () => {
             autoPlay
             loop
             muted
+            preload="auto"
             className="absolute top-0 left-0 size-full object-cover object-center"
-            onLoadedData={handleVideoLoad}
           />
         </div>
 

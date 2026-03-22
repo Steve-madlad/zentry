@@ -85,8 +85,6 @@ export default function BentoGrid() {
               loop
               autoPlay
               muted
-              preload="auto"
-              playsInline
               className="size-full object-cover object-center"
             />
           </BentoTilt>
@@ -104,8 +102,6 @@ export const BentoCard = ({ src, title, description, isCommingSoon }) => {
         loop
         muted
         autoPlay
-        preload="auto"
-        playsInline
         className="absolute top-0 left-0 size-full object-cover object-center"
       />
       <div className="col-between text-white relative z-10 size-full p-5">

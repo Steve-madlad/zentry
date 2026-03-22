@@ -6,12 +6,12 @@ import { useWindowScroll } from 'react-use';
 import Button from './custom/Button';
 
 export default function Navbar() {
-  const navContainer = useRef(null);
+  const navContainer = useRef<HTMLDivElement>(null);
   const navItems = ['Nexus', 'About', 'Vault', 'Prologue', 'Contact'];
 
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const audioElementRef = useRef(null);
+  const audioElementRef = useRef<HTMLAudioElement>(null);
 
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
@@ -20,14 +20,14 @@ export default function Navbar() {
   const hideNav = () => {
     if (currentScrollY === 0) return;
     setIsNavVisible(false);
-    navContainer.current.classList.remove('floating-nav');
+    navContainer?.current?.classList.remove('floating-nav');
   };
 
   const showNav = (floating = true) => {
     setIsNavVisible(true);
     floating
-      ? navContainer.current.classList.add('floating-nav')
-      : navContainer.current.classList.remove('floating-nav');
+      ? navContainer?.current?.classList.add('floating-nav')
+      : navContainer?.current?.classList.remove('floating-nav');
   };
 
   useEffect(() => {
@@ -39,8 +39,8 @@ export default function Navbar() {
   }, [currentScrollY, lastScrollY]);
 
   useEffect(() => {
-    if (isAudioPlaying) audioElementRef.current.play();
-    else audioElementRef.current.pause();
+    if (isAudioPlaying) audioElementRef?.current?.play();
+    else audioElementRef?.current?.pause();
   }, [isAudioPlaying]);
 
   useEffect(() => {

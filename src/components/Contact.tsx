@@ -40,7 +40,7 @@ export default function Contact() {
   );
 }
 
-export const ImageClipBox = ({ className, src }) => {
+export const ImageClipBox = ({ className, src }: { className: string; src: string }) => {
   return (
     <div className={className}>
       <img src={src} />

@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactEventHandler, type SyntheticEvent } from 'react';
 import video1 from '@public/videos/hero-1.mp4';
 import video2 from '@public/videos/hero-2.mp4';
 import video3 from '@public/videos/hero-3.mp4';
@@ -11,30 +11,23 @@ import VideoPreview from './VideoPreview';
 import { MousePointer2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
-const Hero = () => {
+
+export default function Hero({ onPriorityLoad }: { onPriorityLoad: () => void }) {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
 
   const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
 
-  useEffect(() => {
-    if (loading) {
-      document.body.style.overflowY = 'hidden';
-    } else {
-      document.body.style.overflowY = 'unset';
-    }
-
-    return () => {
-      document.body.style.overflowY = 'unset';
-    };
-  }, [loading]);
-
   const totalVideos = 4;
-  const nextVdRef = useRef(null);
+  const nextVdRef = useRef<HTMLVideoElement>(null);
 
-  const handleVideoLoad = () => {
+  const handleVideoLoad = (
+    e: SyntheticEvent<HTMLVideoElement, Event>,
+    isPrimaryVideo: boolean = false,
+  ) => {
     setLoadedVideos((prev) => prev + 1);
+    isPrimaryVideo && onPriorityLoad();
   };
 
   useEffect(() => {
@@ -45,13 +38,12 @@ const Hero = () => {
 
   const videos = [video1, video2, video3, video4];
 
-  const getVidSrc = (index) => {
+  const getVidSrc = (index: number) => {
     return videos[index - 1];
   };
 
   const handleMiniVdClick = () => {
     setHasClicked(true);
-
     setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
   };
 
@@ -66,7 +58,9 @@ const Hero = () => {
           height: '100%',
           duration: 1,
           ease: 'power1.inOut',
-          onStart: () => nextVdRef.current.play(),
+          onStart: () => {
+            nextVdRef?.current?.play();
+          },
         });
         gsap.from('#current-video', {
           transformOrigin: 'center center',
@@ -102,39 +96,30 @@ const Hero = () => {
 
   return (
     <div id="nexus" className="relative h-dvh w-screen overflow-x-hidden">
-      {loading && (
-        <div className="flex-center absolute z-100 h-dvh w-screen overflow-hidden bg-violet-50">
-          {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
-          <div className="three-body">
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-          </div>
-        </div>
-      )}
-
       <div
         id="video-frame"
         className="bg-soft-lavender relative z-10 h-dvh w-screen overflow-hidden rounded-lg"
       >
         <div>
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
-            <VideoPreview>
-              <div
-                onClick={handleMiniVdClick}
-                className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
-              >
-                <video
-                  ref={nextVdRef}
-                  src={getVidSrc((currentIndex % totalVideos) + 1)}
-                  loop
-                  muted
-                  id="current-video"
-                  className="size-64 origin-center scale-150 object-cover object-center"
-                  onLoadedData={handleVideoLoad}
-                />
-              </div>
-            </VideoPreview>
+            {!loading && (
+              <VideoPreview>
+                <div
+                  onClick={handleMiniVdClick}
+                  className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+                >
+                  <video
+                    ref={nextVdRef}
+                    src={getVidSrc((currentIndex % totalVideos) + 1)}
+                    loop
+                    muted
+                    id="current-video"
+                    className="size-64 origin-center scale-150 object-cover object-center"
+                    onLoadedData={handleVideoLoad}
+                  />
+                </div>
+              </VideoPreview>
+            )}
           </div>
 
           <video
@@ -153,7 +138,7 @@ const Hero = () => {
             loop
             muted
             className="absolute top-0 left-0 size-full object-cover object-center"
-            onLoadedData={handleVideoLoad}
+            onLoadedData={(e) => handleVideoLoad(e, true)}
           />
         </div>
 
@@ -184,6 +169,4 @@ const Hero = () => {
       </h1>
     </div>
   );
-};
-
-export default Hero;
+}

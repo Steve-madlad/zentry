@@ -5,7 +5,7 @@ import ScrollTrigger from 'gsap/all';
 import AnimatedTitle from './AnimatedTitle';
 gsap.registerPlugin(ScrollTrigger);
 
-export default function About() {
+export default function About({ onPriorityLoad }: { onPriorityLoad: () => void }) {
   useGSAP(() => {
     const clipAnimation = gsap.timeline({
       scrollTrigger: {
@@ -51,6 +51,7 @@ export default function About() {
             <img
               src={aboutimg}
               alt="about us"
+              onLoad={onPriorityLoad}
               className="absolute top-0 left-0 size-full object-cover"
             />
           </div>

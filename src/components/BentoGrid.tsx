@@ -4,17 +4,17 @@ import gridVideo3 from '@public/videos/feature-3.mp4';
 import gridVideo4 from '@public/videos/feature-4.mp4';
 import gridVideo5 from '@public/videos/feature-5.mp4';
 import { Zap } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useRef, useState, type MouseEvent, type ReactNode } from 'react';
 
-export default function BentoGrid() {
+export default function BentoGrid({ onPriorityLoad }: { onPriorityLoad: () => void }) {
   return (
     <section id="vault" className="pb-20 md:pb-35">
       <div className="container mx-auto px-3 pr-8 md:px-10 md:pr-16 lg:pr-13">
         <div className="px-5 py-32">
-          <h1 className="mix-blend-difference text-white font-zentry text-4xl font-bold md:text-6xl">
+          <h1 className="font-zentry text-4xl font-bold text-white mix-blend-difference md:text-6xl">
             Into the metagame layer
           </h1>
-          <p className="text-white mix-blend-difference font-circular max-w-md text-lg opacity-50">
+          <p className="font-circular max-w-md text-lg text-white opacity-50 mix-blend-difference">
             Immerse yourself in a rich and ever-expanding universe where a vibrant array of products
             converge into an interconnected overlay experience on your world.
           </p>
@@ -28,6 +28,7 @@ export default function BentoGrid() {
                 radia<b>n</b>t
               </>
             }
+            onPriorityLoad={onPriorityLoad}
             description="A cross-platform metagame app, turning your activities across Web2 and Web3 games into a rewarding adventure."
             isCommingSoon
           />
@@ -42,6 +43,7 @@ export default function BentoGrid() {
                   zig<b>m</b>a
                 </>
               }
+              onPriorityLoad={onPriorityLoad}
               description="An anime and gaming-inspired NFT collection - the IP primed for expansion."
             ></BentoCard>
           </BentoTilt>
@@ -54,6 +56,7 @@ export default function BentoGrid() {
                   n<b>e</b>xus
                 </>
               }
+              onPriorityLoad={onPriorityLoad}
               description="A gamified social hub, adding a new dimension of play to social interaction for Web3 communities."
             ></BentoCard>
           </BentoTilt>
@@ -66,6 +69,7 @@ export default function BentoGrid() {
                   az<b>u</b>l
                 </>
               }
+              onPriorityLoad={onPriorityLoad}
               description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
             ></BentoCard>
           </BentoTilt>
@@ -85,6 +89,7 @@ export default function BentoGrid() {
               loop
               autoPlay
               muted
+              onLoadedData={onPriorityLoad}
               className="size-full object-cover object-center"
             />
           </BentoTilt>
@@ -94,7 +99,19 @@ export default function BentoGrid() {
   );
 }
 
-export const BentoCard = ({ src, title, description, isCommingSoon }) => {
+export const BentoCard = ({
+  src,
+  title,
+  description,
+  isCommingSoon,
+  onPriorityLoad,
+}: {
+  src: string;
+  title: ReactNode;
+  description: string;
+  isCommingSoon?: boolean;
+  onPriorityLoad: () => void;
+}) => {
   return (
     <div className="relative size-full">
       <video
@@ -102,12 +119,13 @@ export const BentoCard = ({ src, title, description, isCommingSoon }) => {
         loop
         muted
         autoPlay
+        onLoadedData={onPriorityLoad}
         className="absolute top-0 left-0 size-full object-cover object-center"
       />
-      <div className="col-between text-white relative z-10 size-full p-5">
+      <div className="col-between relative z-10 size-full p-5 text-white">
         <div>
           <h1 className="bento-title special-font">{title}</h1>
-          <p className="mt-3 max-w-64 text-xs md:text-base opacity-80">{description}</p>
+          <p className="mt-3 max-w-64 text-xs opacity-80 md:text-base">{description}</p>
         </div>
       </div>
       {title}
@@ -115,11 +133,11 @@ export const BentoCard = ({ src, title, description, isCommingSoon }) => {
   );
 };
 
-export const BentoTilt = ({ children, className }) => {
-  const [transformStyle, setTransformStyle] = useState();
-  const containerRef = useRef();
+export const BentoTilt = ({ children, className }: { children: ReactNode; className: string }) => {
+  const [transformStyle, setTransformStyle] = useState('');
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
 
     const rect = containerRef.current.getBoundingClientRect();

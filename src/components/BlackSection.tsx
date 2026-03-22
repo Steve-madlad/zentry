@@ -8,7 +8,7 @@ import { useRef } from 'react';
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
-export default function BlackSection() {
+export default function BlackSection({ onPriorityLoad }: { onPriorityLoad: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -81,7 +81,7 @@ export default function BlackSection() {
       />
 
       <div className="content-wrapper isolation-auto">
-        <BentoGrid />
+        <BentoGrid onPriorityLoad={onPriorityLoad} />
         <Story />
       </div>
     </div>

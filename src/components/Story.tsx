@@ -1,12 +1,12 @@
 import storyImage from '@public/img/entrance.webp';
 import gsap from 'gsap';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import AnimatedTitle from './AnimatedTitle';
 import RoundedCorners from './RoundedCorners';
 import Button from './custom/Button';
 
 export default function Story() {
-  const frameRef = useRef();
+  const frameRef = useRef<HTMLImageElement>(null);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -29,7 +29,7 @@ export default function Story() {
       });
     }
   };
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent<HTMLImageElement>) => {
     if (!frameRef.current) return;
 
     const { clientX, clientY } = e;
@@ -57,7 +57,7 @@ export default function Story() {
   return (
     <section id="prologue" className="min-h-dvh w-screen text-inherit">
       <div className="col-center size-full py-10 pb-24">
-        <p className="font-general text-sm uppercase md:text-[10px] opacity-70">
+        <p className="font-general text-sm uppercase opacity-70 md:text-[10px]">
           the multiversal world
         </p>
         <div className="relative size-full">
@@ -110,7 +110,7 @@ export default function Story() {
 
             <Button
               id="realm-button"
-              className="mt-5 bg-white text-black mix-blend-difference py-5"
+              className="mt-5 bg-white py-5 text-black mix-blend-difference"
             >
               discover prologue
             </Button>

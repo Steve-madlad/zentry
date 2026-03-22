@@ -1,14 +1,14 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
-import { useEffect, useRef, useState, type ReactEventHandler, type SyntheticEvent } from 'react';
+import { useEffect, useRef, useState, type SyntheticEvent } from 'react';
 import video1 from '@public/videos/hero-1.mp4';
 import video2 from '@public/videos/hero-2.mp4';
 import video3 from '@public/videos/hero-3.mp4';
 import video4 from '@public/videos/hero-4.mp4';
 import Button from './custom/Button';
 import VideoPreview from './VideoPreview';
-import { MousePointer2 } from 'lucide-react';
+import { Loader2, MousePointer2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,33 +16,38 @@ export default function Hero({ onPriorityLoad }: { onPriorityLoad: () => void })
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
 
-  const [loading, setLoading] = useState(true);
-  const [loadedVideos, setLoadedVideos] = useState(0);
+  const slideVideoCount = 3;
+  const [slideReadyCount, setSlideReadyCount] = useState(0);
+  const skipSlideResetRef = useRef(true);
 
   const totalVideos = 4;
   const nextVdRef = useRef<HTMLVideoElement>(null);
 
+  useEffect(() => {
+    if (skipSlideResetRef.current) {
+      skipSlideResetRef.current = false;
+      return;
+    }
+    setSlideReadyCount(0);
+  }, [currentIndex]);
+
   const handleVideoLoad = (
-    e: SyntheticEvent<HTMLVideoElement, Event>,
+    _e: SyntheticEvent<HTMLVideoElement, Event>,
     isPrimaryVideo: boolean = false,
   ) => {
-    setLoadedVideos((prev) => prev + 1);
+    setSlideReadyCount((prev) => prev + 1);
     isPrimaryVideo && onPriorityLoad();
   };
 
-  useEffect(() => {
-    if (loadedVideos === totalVideos - 1) {
-      setLoading(false);
-    }
-  }, [loadedVideos]);
+  const isSlideReady = slideReadyCount >= slideVideoCount;
 
   const videos = [video1, video2, video3, video4];
-
   const getVidSrc = (index: number) => {
     return videos[index - 1];
   };
 
-  const handleMiniVdClick = () => {
+  const handlePreviewClick = () => {
+    if (!isSlideReady) return;
     setHasClicked(true);
     setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
   };
@@ -102,24 +107,28 @@ export default function Hero({ onPriorityLoad }: { onPriorityLoad: () => void })
       >
         <div>
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
-            {!loading && (
-              <VideoPreview>
-                <div
-                  onClick={handleMiniVdClick}
-                  className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
-                >
-                  <video
-                    ref={nextVdRef}
-                    src={getVidSrc((currentIndex % totalVideos) + 1)}
-                    loop
-                    muted
-                    id="current-video"
-                    className="size-64 origin-center scale-150 object-cover object-center"
-                    onLoadedData={handleVideoLoad}
-                  />
-                </div>
-              </VideoPreview>
-            )}
+            <VideoPreview>
+              <div
+                onClick={handlePreviewClick}
+                className={`origin-center relative scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100 ${!isSlideReady ? 'pointer-events-none' : ''}`}
+              >
+                <video
+                  ref={nextVdRef}
+                  src={getVidSrc((currentIndex % totalVideos) + 1)}
+                  loop
+                  muted
+                  id="current-video"
+                  className="size-64 origin-center scale-150 object-cover object-center"
+                  onLoadedData={handleVideoLoad}
+                />
+
+                {!isSlideReady && (
+                  <div className="absolute inset-0 flex-center size-full scale-150 bg-white opacity-30">
+                    <Loader2 className="animate-spin text-electric-violet" />
+                  </div>
+                )}
+              </div>
+            </VideoPreview>
           </div>
 
           <video

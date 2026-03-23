@@ -23,11 +23,10 @@ export default function Hero({ onPriorityLoad, priorityAssetsReady = false }: He
 
   const slideVideoCount = 3;
   const [slideReadyCount, setSlideReadyCount] = useState(0);
-  const skipSlideResetRef = useRef(true);
-
-  const totalVideos = 4;
+  const skipSlideResetRef = useRef(true);  
+  
   const nextVdRef = useRef<HTMLVideoElement>(null);
-
+  
   useEffect(() => {
     if (skipSlideResetRef.current) {
       skipSlideResetRef.current = false;
@@ -46,9 +45,11 @@ export default function Hero({ onPriorityLoad, priorityAssetsReady = false }: He
 
   const isSlideReady = slideReadyCount >= slideVideoCount;
 
-  const videos = [video2, video3, video4];
+  const totalVideos = 4;
+  const videos = [video1, video2, video3, video4];
   const getVidSrc = (index: number) => {
-    return videos[index - 1];
+    const normalized = ((index - 1) % totalVideos + totalVideos) % totalVideos;
+    return videos[normalized];
   };
 
   const handlePreviewClick = () => {
@@ -158,7 +159,7 @@ export default function Hero({ onPriorityLoad, priorityAssetsReady = false }: He
           />
 
           <video
-            src={getVidSrc(currentIndex === totalVideos - 1 ? 1 : currentIndex)}
+            src={getVidSrc(currentIndex)}
             autoPlay
             loop
             muted
